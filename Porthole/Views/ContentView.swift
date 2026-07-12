@@ -31,11 +31,12 @@ struct MacPortsMissingView: View {
 
 struct ContentView: View {
     @Environment(AppState.self) private var state
-    @State private var columnVisibility: NavigationSplitViewVisibility = .automatic
+    @State private var isSidebarVisible = true
     @State private var lastRootWidth: CGFloat = 0
 
     /// Below this width the sidebar collapses instead of truncating its labels.
     private let sidebarCollapseThreshold: CGFloat = 880
+    private let sidebarWidth: CGFloat = 200
 
     var body: some View {
         Group {
@@ -54,46 +55,61 @@ struct ContentView: View {
         }
     }
 
+    // The obvious layout here is NavigationSplitView, and the app used it until
+    // it hit a macOS 26.5 bug: on some multi-display setups the split view
+    // measures its fitting height as window height + another display's height
+    // (content-independent, reproducible on every fresh launch), lays out both
+    // columns in that oversized, vertically centered frame, and autosaves the
+    // broken geometry. Symptoms: sidebar looks empty, content bleeds past the
+    // title bar and window bottom, row hit-testing is offset by hundreds of
+    // points. No app-side constraint, autosave seeding, or frame pinning fixes
+    // it reliably, so the sidebar is a plain fixed-width List instead.
     private var mainInterface: some View {
         @Bindable var state = state
-        return NavigationSplitView(columnVisibility: $columnVisibility) {
-            List(selection: $state.sidebarSelection) {
-                Label("Installed", systemImage: "shippingbox")
-                    .badge(state.installed.count)
-                    .tag(SidebarItem.installed)
-                Label("Outdated", systemImage: "arrow.triangle.2.circlepath")
-                    .badge(state.outdated.count)
-                    .tag(SidebarItem.outdated)
-                Label("Search", systemImage: "magnifyingglass")
-                    .tag(SidebarItem.search)
-                Label("Maintenance", systemImage: "wrench.and.screwdriver")
-                    .tag(SidebarItem.maintenance)
-            }
-            .navigationSplitViewColumnWidth(min: 175, ideal: 195, max: 240)
-        } detail: {
-            VStack(spacing: 0) {
-                if !state.helper.ready {
-                    HelperOnboardingView()
-                        .transition(.move(edge: .top).combined(with: .opacity))
-                }
-                if let message = state.statusMessage {
-                    InlineBanner(kind: .error, title: message) {
-                        Button("Dismiss") { state.statusMessage = nil }
-                            .controlSize(.small)
+        return NavigationStack {
+            HStack(spacing: 0) {
+                if isSidebarVisible {
+                    List(selection: $state.sidebarSelection) {
+                        Label("Installed", systemImage: "shippingbox")
+                            .badge(state.installed.count)
+                            .tag(SidebarItem.installed)
+                        Label("Outdated", systemImage: "arrow.triangle.2.circlepath")
+                            .badge(state.outdated.count)
+                            .tag(SidebarItem.outdated)
+                        Label("Search", systemImage: "magnifyingglass")
+                            .tag(SidebarItem.search)
+                        Label("Maintenance", systemImage: "wrench.and.screwdriver")
+                            .tag(SidebarItem.maintenance)
                     }
-                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .listStyle(.sidebar)
+                    .frame(width: sidebarWidth)
+                    .transition(.move(edge: .leading))
+                    Divider()
                 }
-                detailContent
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .layoutPriority(1)
-                Divider()
-                ConsoleView()
+                VStack(spacing: 0) {
+                    if !state.helper.ready {
+                        HelperOnboardingView()
+                            .transition(.move(edge: .top).combined(with: .opacity))
+                    }
+                    if let message = state.statusMessage {
+                        InlineBanner(kind: .error, title: message) {
+                            Button("Dismiss") { state.statusMessage = nil }
+                                .controlSize(.small)
+                        }
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                    }
+                    detailContent
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .layoutPriority(1)
+                    Divider()
+                    ConsoleView()
+                }
+                .animation(.snappy(duration: 0.2), value: state.statusMessage)
+                .animation(.snappy(duration: 0.2), value: state.helper.ready)
             }
-            .animation(.snappy(duration: 0.2), value: state.statusMessage)
-            .animation(.snappy(duration: 0.2), value: state.helper.ready)
+            .navigationTitle("Porthole")
+            .toolbar { toolbarContent }
         }
-        .navigationTitle("Porthole")
-        .toolbar { toolbarContent }
         .onGeometryChange(for: CGFloat.self) { proxy in
             proxy.size.width
         } action: { width in
@@ -101,13 +117,13 @@ struct ContentView: View {
             // a manual toggle via the toolbar button is respected otherwise.
             defer { lastRootWidth = width }
             if lastRootWidth <= 0 {
-                if width < sidebarCollapseThreshold { columnVisibility = .detailOnly }
+                if width < sidebarCollapseThreshold { isSidebarVisible = false }
                 return
             }
             if width < sidebarCollapseThreshold && lastRootWidth >= sidebarCollapseThreshold {
-                columnVisibility = .detailOnly
+                isSidebarVisible = false
             } else if width >= sidebarCollapseThreshold && lastRootWidth < sidebarCollapseThreshold {
-                columnVisibility = .all
+                isSidebarVisible = true
             }
         }
     }
@@ -122,6 +138,13 @@ struct ContentView: View {
     }
 
     @ToolbarContentBuilder private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .navigation) {
+            Button("Toggle Sidebar", systemImage: "sidebar.left") {
+                withAnimation(.snappy(duration: 0.2)) { isSidebarVisible.toggle() }
+            }
+            .keyboardShortcut("s", modifiers: [.command, .control])
+            .help("Hide or show the sidebar (⌃⌘S)")
+        }
         ToolbarItemGroup {
             if let operation = state.runningOperation {
                 ProgressView()
