@@ -1,0 +1,484 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA0000000000000000000040 /* PortholeHelper in Embed Helper */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000031 /* PortholeHelper */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AA0000000000000000000041 /* io.github.petergracar.Porthole.helper.plist in Copy LaunchDaemon plist */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000033 /* io.github.petergracar.Porthole.helper.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AA0000000000000000000071 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA0000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA0000000000000000000061;
+			remoteInfo = PortholeHelper;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AA0000000000000000000053 /* Embed Helper */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				AA0000000000000000000040 /* PortholeHelper in Embed Helper */,
+			);
+			name = "Embed Helper";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA0000000000000000000054 /* Copy LaunchDaemon plist */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "Contents/Library/LaunchDaemons";
+			dstSubfolderSpec = 1;
+			files = (
+				AA0000000000000000000041 /* io.github.petergracar.Porthole.helper.plist in Copy LaunchDaemon plist */,
+			);
+			name = "Copy LaunchDaemon plist";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AA0000000000000000000030 /* Porthole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Porthole.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000031 /* PortholeHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PortholeHelper; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000032 /* PortholeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PortholeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000033 /* io.github.petergracar.Porthole.helper.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "io.github.petergracar.Porthole.helper.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		AA0000000000000000000020 /* Porthole */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Porthole;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000021 /* PortholeHelper */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PortholeHelper;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000022 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000023 /* PortholeTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PortholeTests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA0000000000000000000051 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA0000000000000000000056 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA0000000000000000000058 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA0000000000000000000010 = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000020 /* Porthole */,
+				AA0000000000000000000021 /* PortholeHelper */,
+				AA0000000000000000000022 /* Shared */,
+				AA0000000000000000000023 /* PortholeTests */,
+				AA0000000000000000000012 /* SupportFiles */,
+				AA0000000000000000000011 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000011 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000030 /* Porthole.app */,
+				AA0000000000000000000031 /* PortholeHelper */,
+				AA0000000000000000000032 /* PortholeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000012 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000033 /* io.github.petergracar.Porthole.helper.plist */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA0000000000000000000060 /* Porthole */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0000000000000000000083 /* Build configuration list for PBXNativeTarget "Porthole" */;
+			buildPhases = (
+				AA0000000000000000000050 /* Sources */,
+				AA0000000000000000000051 /* Frameworks */,
+				AA0000000000000000000052 /* Resources */,
+				AA0000000000000000000053 /* Embed Helper */,
+				AA0000000000000000000054 /* Copy LaunchDaemon plist */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA0000000000000000000070 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AA0000000000000000000020 /* Porthole */,
+				AA0000000000000000000022 /* Shared */,
+			);
+			name = Porthole;
+			productName = Porthole;
+			productReference = AA0000000000000000000030 /* Porthole.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA0000000000000000000061 /* PortholeHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0000000000000000000086 /* Build configuration list for PBXNativeTarget "PortholeHelper" */;
+			buildPhases = (
+				AA0000000000000000000055 /* Sources */,
+				AA0000000000000000000056 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AA0000000000000000000021 /* PortholeHelper */,
+				AA0000000000000000000022 /* Shared */,
+			);
+			name = PortholeHelper;
+			productName = PortholeHelper;
+			productReference = AA0000000000000000000031 /* PortholeHelper */;
+			productType = "com.apple.product-type.tool";
+		};
+		AA0000000000000000000062 /* PortholeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0000000000000000000089 /* Build configuration list for PBXNativeTarget "PortholeTests" */;
+			buildPhases = (
+				AA0000000000000000000057 /* Sources */,
+				AA0000000000000000000058 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AA0000000000000000000023 /* PortholeTests */,
+				AA0000000000000000000022 /* Shared */,
+			);
+			name = PortholeTests;
+			productName = PortholeTests;
+			productReference = AA0000000000000000000032 /* PortholeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA0000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1700;
+				LastUpgradeCheck = 1700;
+				TargetAttributes = {
+					AA0000000000000000000060 = {
+						CreatedOnToolsVersion = 17.0;
+					};
+					AA0000000000000000000061 = {
+						CreatedOnToolsVersion = 17.0;
+					};
+					AA0000000000000000000062 = {
+						CreatedOnToolsVersion = 17.0;
+					};
+				};
+			};
+			buildConfigurationList = AA0000000000000000000080 /* Build configuration list for PBXProject "Porthole" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA0000000000000000000010;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = AA0000000000000000000011 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA0000000000000000000060 /* Porthole */,
+				AA0000000000000000000061 /* PortholeHelper */,
+				AA0000000000000000000062 /* PortholeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA0000000000000000000052 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA0000000000000000000050 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA0000000000000000000055 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA0000000000000000000057 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA0000000000000000000070 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA0000000000000000000061 /* PortholeHelper */;
+			targetProxy = AA0000000000000000000071 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AA0000000000000000000081 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Y343K25JG3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AA0000000000000000000082 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Y343K25JG3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		AA0000000000000000000084 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.petergracar.Porthole;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		AA0000000000000000000085 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.petergracar.Porthole;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		AA0000000000000000000087 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 3;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.petergracar.Porthole.helper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		AA0000000000000000000088 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 3;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.petergracar.Porthole.helper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		AA000000000000000000008A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.petergracar.PortholeTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+			};
+			name = Debug;
+		};
+		AA000000000000000000008B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.petergracar.PortholeTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA0000000000000000000080 /* Build configuration list for PBXProject "Porthole" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000081 /* Debug */,
+				AA0000000000000000000082 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0000000000000000000083 /* Build configuration list for PBXNativeTarget "Porthole" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000084 /* Debug */,
+				AA0000000000000000000085 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0000000000000000000086 /* Build configuration list for PBXNativeTarget "PortholeHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000087 /* Debug */,
+				AA0000000000000000000088 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0000000000000000000089 /* Build configuration list for PBXNativeTarget "PortholeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA000000000000000000008A /* Debug */,
+				AA000000000000000000008B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA0000000000000000000001 /* Project object */;
+}
