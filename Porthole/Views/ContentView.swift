@@ -145,27 +145,33 @@ struct ContentView: View {
             .keyboardShortcut("s", modifiers: [.command, .control])
             .help("Hide or show the sidebar (⌃⌘S)")
         }
+        // List refreshes are automatic (MacPortsChangeMonitor), so the trailing
+        // slot is selfupdate — swapped for the stop button while anything runs.
         ToolbarItemGroup {
             if let operation = state.runningOperation {
                 ProgressView()
                     .controlSize(.small)
+                    // Breathing room against the capsule edge, which hugs the
+                    // spinner tighter than it does bordered buttons.
+                    .padding(.horizontal, Metrics.spacingXS)
                 Text(operation.displayName)
                     .foregroundStyle(.secondary)
-                Button("Cancel", systemImage: "stop.circle") {
+                Button("Stop", systemImage: "stop.circle") {
                     state.cancelRunning()
                 }
                 .help("Interrupt the running port command")
-            }
-            if state.isRefreshing {
+            } else if state.isRefreshing {
                 ProgressView()
                     .controlSize(.small)
+                    .padding(.horizontal, Metrics.spacingXS)
                     .help("Refreshing…")
             } else {
-                Button("Refresh", systemImage: "arrow.clockwise") {
-                    Task { await state.refreshAll(announce: true) }
+                Button("Selfupdate", systemImage: "arrow.clockwise") {
+                    Task { await state.run(.selfupdate) }
                 }
                 .keyboardShortcut("r", modifiers: .command)
-                .help("Reload installed and outdated ports (⌘R)")
+                .disabled(!state.canMutate)
+                .help("Update MacPorts and sync the ports tree (⌘R)")
             }
         }
     }

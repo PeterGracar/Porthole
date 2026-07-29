@@ -90,6 +90,7 @@ final class AppState {
     var isRefreshing = false
     var portInstalled = FileManager.default.isExecutableFile(atPath: kPortExecutablePath)
     private var servicesStarted = false
+    private var changeMonitor: MacPortsChangeMonitor?
 
     var canMutate: Bool { runningOperation == nil && helper.ready }
 
@@ -105,8 +106,25 @@ final class AppState {
         if portInstalled && !servicesStarted {
             servicesStarted = true
             helper.start()
+            startChangeMonitor()
             Task { await refreshAll() }
         }
+    }
+
+    /// Refreshes the lists whenever MacPorts state changes on disk, so ports
+    /// installed from a terminal show up without any manual refresh. In-app
+    /// operations are skipped here — run() already refreshes when they finish.
+    /// Safe against feedback loops: the app's own queries run unprivileged and
+    /// cannot write to the root-owned watched directories.
+    private func startChangeMonitor() {
+        let monitor = MacPortsChangeMonitor { [weak self] in
+            Task { @MainActor in
+                guard let self, self.runningOperation == nil else { return }
+                await self.refreshAll()
+            }
+        }
+        monitor.start()
+        changeMonitor = monitor
     }
 
     /// Reloads the installed and outdated lists. `announce` adds a console

@@ -16,15 +16,6 @@ struct MaintenanceView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: Metrics.spacingL) {
                 section(
-                    title: "Ports Tree",
-                    description: "Update the MacPorts base system and sync the ports tree definitions (port selfupdate)."
-                ) {
-                    Button("Run Selfupdate") {
-                        Task { await state.run(.selfupdate) }
-                    }
-                    .disabled(!state.canMutate)
-                }
-                section(
                     title: "Upgrade",
                     description: "Upgrade all installed ports for which a newer version is available (port upgrade outdated)."
                 ) {

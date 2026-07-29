@@ -14,7 +14,7 @@ struct OutdatedView: View {
                 ContentUnavailableView(
                     "Everything Up to Date",
                     systemImage: "checkmark.seal",
-                    description: Text("No outdated ports. Run Selfupdate to refresh the ports tree, then check again.")
+                    description: Text("No outdated ports. Run selfupdate from the toolbar to sync the ports tree, then check again.")
                 )
             } else {
                 MasterDetail {
@@ -26,10 +26,6 @@ struct OutdatedView: View {
             }
             Divider()
             HStack {
-                Button("Selfupdate") {
-                    Task { await state.run(.selfupdate) }
-                }
-                .help("Update MacPorts itself and sync the ports tree")
                 Spacer()
                 Button("Upgrade All Outdated") {
                     Task { await state.run(.upgradeOutdated) }
