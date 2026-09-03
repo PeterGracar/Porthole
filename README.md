@@ -4,7 +4,7 @@ A native SwiftUI GUI for [MacPorts](https://www.macports.org).
 
 - Browse installed ports (with versions, variants, active state) and uninstall them
 - Search the ports tree and install by name
-- One-click Selfupdate, Upgrade Outdated, and Reclaim
+- One-click Selfupdate, Upgrade Outdated, Reclaim, and Migrate (after a macOS upgrade)
 - Cleanup helpers for inactive versions and leaves, with a preview of what gets removed
 - Detail pane with description, homepage, variants, and dependencies
 - Live console streaming `port`'s output, with Cancel

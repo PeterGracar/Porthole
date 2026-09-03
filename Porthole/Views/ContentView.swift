@@ -108,6 +108,12 @@ struct ContentView: View {
                 .animation(.snappy(duration: 0.2), value: state.helper.ready)
             }
             .navigationTitle("Porthole")
+            // The window keeps its name (Window menu, Mission Control,
+            // VoiceOver), but the title is not drawn in the toolbar: on macOS
+            // 26+ it shares one leading capsule with the sidebar toggle, and
+            // that capsule is wider than sidebarWidth, so the title straddled
+            // the sidebar/content divider.
+            .toolbar(removing: .title)
             .toolbar { toolbarContent }
         }
         .onGeometryChange(for: CGFloat.self) { proxy in

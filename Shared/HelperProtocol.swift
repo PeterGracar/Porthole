@@ -5,7 +5,7 @@ let kMachServiceName = "io.github.petergracar.Porthole.helper"
 
 /// Bumped whenever the XPC protocol or helper behavior changes; the app
 /// re-registers the daemon when the running helper reports a different version.
-let kHelperVersion = 2
+let kHelperVersion = 3
 
 let kPortExecutablePath = "/opt/local/bin/port"
 
@@ -22,6 +22,7 @@ let kPortExecutablePath = "/opt/local/bin/port"
     case clean
     // New cases go at the end so existing raw values stay stable.
     case upgrade
+    case migrate
 
     var displayName: String {
         switch self {
@@ -36,6 +37,7 @@ let kPortExecutablePath = "/opt/local/bin/port"
         case .deactivate: return "Deactivate"
         case .clean: return "Clean"
         case .upgrade: return "Upgrade"
+        case .migrate: return "Migrate"
         }
     }
 
@@ -62,6 +64,8 @@ let kPortExecutablePath = "/opt/local/bin/port"
         case .deactivate: return ["-N", "deactivate"] + packages
         case .clean: return ["-N", "clean", "--all"] + packages
         case .upgrade: return ["-N", "upgrade"] + packages
+        // -N is required: migrate asks for confirmation, and stdin is /dev/null.
+        case .migrate: return ["-N", "migrate"]
         }
     }
 }

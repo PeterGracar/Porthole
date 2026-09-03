@@ -4,6 +4,8 @@ struct MaintenanceView: View {
     @Environment(AppState.self) private var state
     @State private var preview: CleanupPreview?
     @State private var isLoadingPreview = false
+    @State private var isConfirmingMigrate = false
+    @State private var migrateAcknowledged = false
 
     struct CleanupPreview: Identifiable {
         let operation: PortOperation
@@ -47,12 +49,51 @@ struct MaintenanceView: View {
                     Button("Uninstall Leaves…") { loadPreview(.uninstallLeaves) }
                         .disabled(isLoadingPreview)
                 }
+                section(
+                    title: "Migrate After a macOS Upgrade",
+                    description: "After a major macOS update (or a move to a different CPU architecture), MacPorts itself and every installed port must be rebuilt for the new platform (port migrate). Does nothing when no migration is needed. Can take a long time and requires Xcode or the Command Line Tools for the new macOS."
+                ) {
+                    Button("Migrate…") { isConfirmingMigrate = true }
+                        .disabled(!state.canMutate)
+                }
             }
             .padding(Metrics.spacingL)
         }
         .sheet(item: $preview) { preview in
             previewSheet(preview)
         }
+        .sheet(isPresented: $isConfirmingMigrate, onDismiss: { migrateAcknowledged = false }) {
+            migrateSheet
+        }
+    }
+
+    /// Migration is long-running and rebuilds MacPorts base under itself, so
+    /// starting it takes three deliberate actions: the Migrate… button, the
+    /// acknowledgement checkbox, and the Migrate button. No button is the
+    /// default action, so Return cannot start it either.
+    private var migrateSheet: some View {
+        VStack(alignment: .leading, spacing: Metrics.spacingM) {
+            Text("Migrate MacPorts to this macOS version?").font(.title3).bold()
+            Text("Runs 'port migrate'. MacPorts base is reinstalled first, then every port that is incompatible with the current platform is rebuilt from source. This can take hours and requires Xcode or the Command Line Tools for the new macOS.")
+                .fixedSize(horizontal: false, vertical: true)
+            Label("Do not interrupt the migration while MacPorts base is being reinstalled.", systemImage: "exclamationmark.triangle")
+                .foregroundStyle(.orange)
+                .fixedSize(horizontal: false, vertical: true)
+            Toggle("I understand this can take a long time and should not be interrupted", isOn: $migrateAcknowledged)
+            HStack {
+                Spacer()
+                Button("Cancel") { isConfirmingMigrate = false }
+                    .keyboardShortcut(.cancelAction)
+                Button("Migrate") {
+                    isConfirmingMigrate = false
+                    Task { await state.run(.migrate) }
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(!migrateAcknowledged || !state.canMutate)
+            }
+        }
+        .padding(Metrics.spacingL)
+        .frame(minWidth: 440, maxWidth: 520)
     }
 
     private func section(title: String, description: String, @ViewBuilder content: () -> some View) -> some View {
