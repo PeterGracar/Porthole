@@ -20,6 +20,13 @@ struct ConsoleView: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(state.isConsoleExpanded ? "Hide console" : "Show console")
+                // Activity lives here rather than in the toolbar, next to the
+                // output it produces (see the toolbar comment in ContentView).
+                if let operation = state.runningOperation {
+                    activityLabel(operation.displayName)
+                } else if state.isRefreshing {
+                    activityLabel("Refreshing…")
+                }
                 Spacer()
                 if state.isConsoleExpanded {
                     Toggle("Auto-scroll", isOn: $autoScroll)
@@ -81,6 +88,19 @@ struct ConsoleView: View {
                 }
             }
         }
+    }
+
+    private func activityLabel(_ title: String) -> some View {
+        HStack(spacing: Metrics.spacingS) {
+            ProgressView()
+                .controlSize(.small)
+            Text(title)
+                .font(.callout)
+                .foregroundStyle(.secondary)
+        }
+        .padding(.leading, Metrics.spacingXS)
+        .transition(.opacity)
+        .animation(.easeInOut(duration: 0.15), value: title)
     }
 
     private func copyLog() {
